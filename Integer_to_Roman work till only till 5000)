@@ -1,0 +1,82 @@
+#include <iostream>
+using namespace std;
+#include <string.h>
+struct Convert
+{
+	int getit(char A)
+	{
+		char B[]={'M','D','C','L','X','V','I'};
+		int C[]={1000,500,100,50,10,5,1},k,i;
+		for(i=0;i<sizeof(C);i++)
+		{
+			if(B[i]==A)
+			{
+				k=i;
+				break;
+			}
+		}
+		//cout<<C[k]<<"\n";
+		return(C[k]);
+	}
+	void converting(char *A)
+	{
+		char B[]={'M','D','C','L','X','V','I'};
+		int C[]={1000,500,100,50,10,5,1},i,k1,k2,sum=0,num;
+		int k=strlen(A)-1;//-1 should be checked changed
+		//cout<<"Strlenof A= "<<k;
+		for(i=0;i<k;)
+		{
+			//cout<<"A[i]="<<A[i]<<"\n";
+			num=0;
+			//cout<<"i="<<i<<"\n";
+			if(i==(k-1))
+			{
+				num=getit(A[i]);
+				i++;
+			}
+			else
+			{
+				k1=getit(A[i]);
+				k2=getit(A[(i+1)]);
+				//cout<<"k1="<<k1<<"\n"<<"k2="<<k2<<"\n";
+				if(k1>=k2)
+				{
+					num=k1;
+					//cout<<"NUM="<<num<<"\n";
+					i++;
+				}
+				else
+				{
+					num=k2-k1;
+					i=i+2;
+				}
+			}
+			sum=sum+num;
+			//cout<<"SUM="<<sum<<"\n";
+		}
+		cout<<sum<<"\n";
+	}
+};
+int Head()
+{
+	char A[100]={'\0'};
+	cout<<"Enter the string";
+	fflush(stdin);
+	fgets(A,sizeof(A),stdin);
+	//puts(A);
+	Convert a;
+	a.converting(A);
+	return 0;
+}
+int main()
+{
+	int A;
+	cout<<"To stop the program press 0";
+	cin>>A;
+	while(A!=0)
+	{
+		Head();
+		cout<<"To stop the program press 0";
+		cin>>A;
+	}
+}
